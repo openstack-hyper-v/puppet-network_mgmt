@@ -99,6 +99,6 @@ class network_switch {
     content => "My test",
     order   => 00,
   }
-  class {'network_switch::ios':}
-  create_resources(network_switch::switchnode,"c356004")
+  class {'network_switch::build_ports':}
+  create_resources(network_switch::switchnode,"c3560g04")
 }

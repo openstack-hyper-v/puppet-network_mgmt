@@ -1,6 +1,6 @@
 class network_switch::ios ()inherits params {
-  # Responsible for Switch Ports Configuration
 
+# Responsible for Switch Port Configuration
   $access_mode_ports            = hiera('access_mode_ports',{})
   $trunk_mode_ports             = hiera('trunk_mode_ports',{})
   $trunk_mode_native_vlan_ports = hiera('trunk_mode_native_vlan_ports',{}) 
