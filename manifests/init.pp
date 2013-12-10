@@ -36,24 +36,60 @@
 # Copyright 2013 Your name here, unless otherwise noted.
 #
 class network_switch {
-  file {"/etc/puppet/manifests/network":
-    ensure => directory,
-    #user   => 'root',
-    group  => 'root',
-    mode   => '0644',
-  }
-# We need /etc/puppet/manifests/.gitignore because this module manages devices in /etc/puppet/manifests/network 
-  file {"/etc/puppet/manifests/.gitignore":
+
+# Begin File Definition 
+# For Managing physical network resources
+
+# File /etc/puppet/.gitignore
+# &
+# File /etc/puppet/manifests/.gitignore
+# Setting to ignore the folders we create
+# to house the auto generated switch config
+
+  file {'/etc/puppet/.gitignore':
     ensure  => file,
-    #user    => 'root',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => 'device.conf',
+    require => File["/etc/puppet/manifests/network"],
+  }
+
+
+  file {'/etc/puppet/manifests/.gitignore':
+    ensure  => file,
+    owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => 'network',
     require => File["/etc/puppet/manifests/network"],
   }
 
+  file {"/etc/puppet/manifests/network":
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+  }
+
+  file {"/etc/puppet/manifests/network/switch":
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    require => File["/etc/puppet/manifests/network"],
+  }
+
+  file {"/etc/puppet/manifests/network/port":
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    require => File["/etc/puppet/manifests/network"],
+  }
+
   concat {"/etc/puppet/device.conf.test":
-    #user    => 'root',
+    #owner    => 'root',
     group   => 'root',
     mode    => '0644',
   }
