@@ -1,0 +1,24 @@
+mode_access:
+  GigabitEthernet0/13:
+    description: "Access mode port 0/13 on VLAN 3"
+    mode: access 
+    native_vlan: 3
+
+  GigabitEthernet0/14:
+    description: "Access mode port 0/14 on VLAN 4"
+    mode: access
+    native_vlan: 3
+
+mode_trunk:
+  GigabitEthernet0/15:
+    description: "Trunk  mode port 0/15 on VLAN 500-1000"
+    mode: trunk
+    allowed_trunk_vlans: "500,600"
+
+mode_trunk_with_native_vlan:
+  GigabitEthernet0/16:
+    description: "Trunk  mode port 0/16 on VLAN 3-6"
+    mode: trunk
+    allowed_trunk_vlans: "3,6"
+    native_vlan: 3
+
