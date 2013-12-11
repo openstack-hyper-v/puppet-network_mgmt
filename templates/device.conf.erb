@@ -1,0 +1,8 @@
+# == Template: network_mgmt::device.conf.erb
+# This is the template for generating entries
+# /etc/puppet/device.conf. This file is used
+# to control your networking devices
+
+[<%= @name %>.<%=@domain%>]
+type <%=@device_type%>
+url <%=@access_method%>://<%=@username%>:<%=@user_password%>@<%=@name%>.<%=@domain%>/?enable=<%=@enable_password%>
