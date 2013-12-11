@@ -4,8 +4,8 @@ class network_mgmt::params{
 
 # Device Data
 ##
-  $cisco_device = hiera('cisco_devices',{})
-  $f5_device    = hiera('f5_devices',{})
+  $cisco_devices = hiera('cisco_devices',{})
+  $f5_devices    = hiera('f5_devices',{})
 
 # Owner,Mode,Group for filesystem resources
 ##

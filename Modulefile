@@ -1,4 +1,4 @@
-name    'puppet-network_switch'
+name    'puppet-network_mgmt'
 version '0.1.0'
 source 'UNKNOWN'
 author 'puppet'

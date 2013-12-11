@@ -9,11 +9,11 @@ define network_mgmt::device (
   $enable_password,
   $username,
   $user_password,
-) inherits params {
+) {
 
   concat::fragment{"device.conf-${device_type}_${name}":
     target  => "/etc/puppet/device.conf",
-    content => template("network_switch/device.erb"),
+    content => template("network_mgmt/device.conf.erb"),
     order   => '02',
   }
 
