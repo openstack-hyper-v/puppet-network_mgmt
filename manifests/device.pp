@@ -13,7 +13,7 @@ define network_mgmt::device (
 
   concat::fragment{"device.conf-${device_type}_${name}":
     target  => "/etc/puppet/device.conf",
-    content => template("network_switch/device.erb"),
+    content => template("network_mgmt/device.conf.erb"),
     order   => '02',
   }
 
