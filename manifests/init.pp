@@ -8,9 +8,8 @@
 #    user_password   => 'password', 
 #  }
 
-class network_mgmt{
-#()inherits params{
-  $cisco_devices = hiera('cisco_devices',{})
+class network_mgmt()inherits params{
+#  $cisco_devices = hiera('cisco_devices',{})
 
 
 # This class create the default filesytem layout
