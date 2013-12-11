@@ -62,7 +62,7 @@ class network_mgmt::files(
   }
   concat::fragment {"device.conf_header":
     target  => "/etc/puppet/device.conf",
-    content => template("network_switch/warning.erb"),
+    content => template("network_mgmt/warning.erb"),
     order   => '00',
   }
 
