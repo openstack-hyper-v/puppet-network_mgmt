@@ -1,6 +1,0 @@
-<%# SDN Port Trunk Mode Vlan 500-1000 %>
- interface { <%= @port %>:
-   description         =>  <%= @description %>",
-   mode                => trunk,
-   allowed_trunk_vlans => <%= @vlans %>,
-}

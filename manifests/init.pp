@@ -1,41 +1,7 @@
 # == Class: network_switch
 #
-# Full description of class network_switch here.
-#
-# === Parameters
-#
-# Document parameters here.
-#
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-# === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
-#
-# === Examples
-#
-#  class { network_switch:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#  }
-#
-# === Authors
-#
-# Author Name <author@domain.com>
-#
-# === Copyright
-#
-# Copyright 2013 Your name here, unless otherwise noted.
-#
-class network_switch {
+class network_switch{
+  $cisco_devices = hiera('cisco_devices',{})
 
 # Begin File Definition 
 # For Managing physical network resources
@@ -88,17 +54,27 @@ class network_switch {
     require => File["/etc/puppet/manifests/network"],
   }
 
-  concat {"/etc/puppet/device.conf.test":
-    #owner    => 'root',
+  concat {"/etc/puppet/device.conf":
+    owner    => 'root',
     group   => 'root',
     mode    => '0644',
   }
   concat::fragment {"device.conf_header":
-    target  => "/etc/puppet/device.conf.test",
-    #content => template("network_switch/switch_node_definition_header.erb"),
-    content => "My test",
-    order   => 00,
+    target  => "/etc/puppet/device.conf",
+    content => template("network_switch/warning.erb"),
+    order   => '00',
   }
-  class {'network_switch::build_ports':}
-  create_resources(network_switch::switchnode,"c3560g04")
+
+#network_switch::node_definition{'c3560g04':
+#    device_type     => 'cisco',
+#    access_method   => 'telnet',
+#    enable_password => 'hard24get',
+#    username        => 'puppet',
+#    user_password   => $user_password,
+#}
+
+create_resources(node_definition,$cisco_devices)
+
+#  class {'network_switch::build_ports':}
+#  create_resources(network_switch::switchnode,"c3560g04")
 }
