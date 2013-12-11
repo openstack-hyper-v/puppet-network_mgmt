@@ -5,7 +5,7 @@ define network_switch::access_port ( $description,$mode,$interface,)inherits par
   define "mode_access" ($description,$mode,$native_vlan){
     interface { $name:
       description => $description,
-      mode        => $mode,
+      mode        => $access,
       native_vlan => $native_vlan,
     }
   }

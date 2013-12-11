@@ -1,4 +1,4 @@
-# == Class: network_switch
+# == Class: network_mgmt
 #
 class network_switch{
   $cisco_devices = hiera('cisco_devices',{})
@@ -73,7 +73,8 @@ class network_switch{
 #    user_password   => $user_password,
 #}
 
-create_resources(node_definition,$cisco_devices)
+create_resources(switch,$cisco_devices)
+create_resources(ports,$cisco_devices)
 
 #  class {'network_switch::build_ports':}
 #  create_resources(network_switch::switchnode,"c3560g04")

@@ -1,4 +1,4 @@
-define network_switch::node_definition(
+define network_mgmt::switch(
   $switch_name = "${name}",
   $device_type,
   $access_method,
