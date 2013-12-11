@@ -8,7 +8,10 @@
 #    user_password   => 'password', 
 #  }
 
-class network_mgmt()inherits params{
+class network_mgmt{
+#()inherits params{
+  $cisco_devices = hiera('cisco_devices',{})
+
 
 # This class create the default filesytem layout
 # to allow for automated management and control
@@ -47,14 +50,6 @@ class network_mgmt()inherits params{
   }
 
   file {"/etc/puppet/manifests/network/switch":
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    require => File["/etc/puppet/manifests/network"],
-  }
-
-  file {"/etc/puppet/manifests/network/port":
     ensure => directory,
     owner  => 'root',
     group  => 'root',

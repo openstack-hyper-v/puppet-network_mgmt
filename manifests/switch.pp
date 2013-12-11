@@ -18,13 +18,19 @@ define network_mgmt::switch(
   file {"/etc/puppet/manifests/network/switch/${name}":
     ensure => directory,
   }
-  concat { "/etc/puppet/manifests/network/switch/${name}.pp":
+  file {"/etc/puppet/manifests/network/switch/${name}/port":
+    ensure  => directory,
+    require => File["/etc/puppet/manifests/network/switch/${name}"],
+  }
+#  concat { "/etc/puppet/manifests/network/switch/${name}.pp":
+  concat { "/etc/puppet/manifests/network/${name}.pp":
     owner => 'root',
     group => 'root',
     mode  => '0644'
   }
   concat::fragment{ "${name}-switch_node_definition_header":
-    target  => "/etc/puppet/manifests/network/switch/${name}.pp",
+#    target  => "/etc/puppet/manifests/network/switch/${name}.pp",
+    target  => "/etc/puppet/manifests/network/${name}.pp",
     content => template("network_mgmt/warning.erb"),
     order   => '00',
   }
