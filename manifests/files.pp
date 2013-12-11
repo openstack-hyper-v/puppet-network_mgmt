@@ -1,10 +1,11 @@
-# == Class: network_mgmt
+# == Class: network_mgmt::files
 #
-class network_mgmt{
-  $cisco_devices = hiera('cisco_devices',{})
+class network_mgmt::files(
+)inherits params{
 
-# Begin File Definition 
-# For Managing physical network resources
+# This class create the default filesytem layout
+# to allow for automated management and control
+# of networking devices with puppet.
 
 # File /etc/puppet/.gitignore
 # &
@@ -65,17 +66,4 @@ class network_mgmt{
     order   => '00',
   }
 
-#network_switch::node_definition{'c3560g04':
-#    device_type     => 'cisco',
-#    access_method   => 'telnet',
-#    enable_password => 'hard24get',
-#    username        => 'puppet',
-#    user_password   => $user_password,
-#}
-
-create_resources(switch,$cisco_devices)
-create_resources(ports,$cisco_devices)
-
-#  class {'network_switch::build_ports':}
-#  create_resources(network_switch::switchnode,"c3560g04")
 }
