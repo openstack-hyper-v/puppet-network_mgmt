@@ -1,10 +1,11 @@
+# == Class: network_mgmt::switch
 define network_mgmt::switch(
-  $switch_name = "${name}",
   $device_type,
   $access_method,
   $enable_password,
   $username,
   $user_password,
+  $switch_name = $name,
 ){
 
   network_mgmt::device{$name:
@@ -31,7 +32,7 @@ define network_mgmt::switch(
   concat::fragment{ "${name}-switch_node_definition_header":
 #    target  => "/etc/puppet/manifests/network/switch/${name}.pp",
     target  => "/etc/puppet/manifests/network/${name}.pp",
-    content => template("network_mgmt/warning.erb"),
+    content => template('network_mgmt/warning.erb'),
     order   => '00',
   }
 

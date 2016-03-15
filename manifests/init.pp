@@ -8,7 +8,7 @@
 #    user_password   => 'password', 
 #  }
 
-class network_mgmt()inherits params{
+class network_mgmt()inherits network_mgmt::params{
 #  $cisco_devices = hiera('cisco_devices',{})
 
 
@@ -28,7 +28,7 @@ class network_mgmt()inherits params{
     group   => 'root',
     mode    => '0644',
     content => 'device.conf',
-    require => File["/etc/puppet/manifests/network"],
+    require => File['/etc/puppet/manifests/network'],
   }
 
 
@@ -38,36 +38,34 @@ class network_mgmt()inherits params{
     group   => 'root',
     mode    => '0644',
     content => 'network',
-    require => File["/etc/puppet/manifests/network"],
+    require => File['/etc/puppet/manifests/network'],
   }
 
-  file {"/etc/puppet/manifests/network":
+  file {'/etc/puppet/manifests/network':
     ensure => directory,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
 
-  file {"/etc/puppet/manifests/network/switch":
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    require => File["/etc/puppet/manifests/network"],
-  }
-
-  concat {"/etc/puppet/device.conf":
-    owner    => 'root',
+  file {'/etc/puppet/manifests/network/switch':
+    ensure  => directory,
+    owner   => 'root',
     group   => 'root',
     mode    => '0644',
+    require => File['/etc/puppet/manifests/network'],
   }
-  concat::fragment {"device.conf_header":
-    target  => "/etc/puppet/device.conf",
-    content => template("network_mgmt/warning.erb"),
+
+  concat {'/etc/puppet/device.conf':
+    owner => 'root',
+    group => 'root',
+    mode  => '0644',
+  }
+  concat::fragment {'device.conf_header':
+    target  => '/etc/puppet/device.conf',
+    content => template('network_mgmt/warning.erb'),
     order   => '00',
   }
-  create_resources(switch,$cisco_devices)
+  create_resources(switch,$::cisco_devices)
 #  create_resources(port,$cisco_devices)
-
-
 }
