@@ -7,7 +7,7 @@ define network_switch::port (
     ensure              => $::ensure,
     description         => $::description,
     allowed_trunk_vlans => $::allowed_trunk_vlans,
-    description         => $::description,
+    switch_description         => $::description,
     device_url          => $::device_url,
     duplex              => $::duplex,
     encapsultation      => $::encapsulation,
